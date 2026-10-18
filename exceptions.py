@@ -22,3 +22,13 @@ async def pincode_not_found_handler(request: Request, exc: PinCodeNotFoundError)
             "pincode": exc.pincode
         }
     )
+
+async def invalid_pincode_handler(request: Request, exc: InvalidPinCodeError):
+    return JSONResponse(
+        status_code=400,
+        content={
+            "error": "invalid_pincode",
+            "message": f"Pincode '{exc.pincode}' is invalid: {exc.reason}",
+            "pincode": exc.pincode
+        }
+    )
